@@ -4,5 +4,5 @@ const router = express.Router();
 
 router.post("/takeImages", uploadcontroller.single_upload);
 router.delete("/deleteImage", uploadcontroller.delete_image);
-
+router.post("/takeMultipleImages", uploadcontroller.multiple_upload);
 export default router;

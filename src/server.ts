@@ -1,10 +1,12 @@
 import path from "path";
+import cors from "cors";
 import * as dotenv from "dotenv";
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
 import express, { Application, Request, Response } from "express";
 import { env } from "./config/env";
 import useUpload from "./routes/upload.routes";
 const app: Application = express();
+app.use(cors());
 const PORT = Number(env.PORT) || 4502;
 
 app.use(express.static("public"));

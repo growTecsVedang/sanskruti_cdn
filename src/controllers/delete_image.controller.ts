@@ -4,6 +4,7 @@ import path from "path";
 
 const delete_image = async (req: Request, res: Response) => {
   const url_params = req.query;
+  console.log(url_params);
   const name = url_params.name;
   const location = path.join(__dirname, "../../public/");
   let file_path = "";

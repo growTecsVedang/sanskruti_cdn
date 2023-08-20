@@ -3,9 +3,10 @@ import sharp from "sharp";
 import fs from "fs";
 
 const single_upload = async (req: Request, res: Response) => {
-  const name = req.body.data.imageName;
+  const name = req.body.imageName;
   const extension = name.split(".")[1];
-  const buf = req.body.data.imageBuffer;
+  const imageBuffer = Buffer.from(req.body.image, "base64");
+  console.log(name);
   let path = " ";
   if (extension === "png") {
     path = __dirname
@@ -28,13 +29,11 @@ const single_upload = async (req: Request, res: Response) => {
       .concat(`${name}`)
       .replace(".jpeg", ".webp");
   }
-  console.log(buf);
-  let originalPath = "https://cdn.sanskrutinx.in/".concat(
+  let originalPath = "http://localhost:4501/".concat(
     path.split("\\public\\")[1]
   );
   console.log(originalPath);
 
-  const imageBuffer = Buffer.from(buf);
   sharp(imageBuffer)
     .toFormat("webp")
     .toBuffer()
