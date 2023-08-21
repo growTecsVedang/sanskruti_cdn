@@ -4,14 +4,17 @@ import fs from "fs";
 
 const multiple_upload_update = async (req: Request, res: Response) => {
   const imgArray = req.body;
-  let Result = [];
+  let Result: Array<object> = [];
+  imgArray.forEach((item: any) => {
+    console.log(item);
+  });
   let urls1 = imgArray.filter((item: any) => {
-    return item.length < 100;
+    return item.image.length < 100;
   });
   let urls2 = imgArray.filter((item: any) => {
-    return item.length > 100;
+    return item.image.length > 100;
   });
-
+  console.log(urls1.length, urls2.length, imgArray.length);
   let urls = urls2.map((item: any, key: any) => {
     const name = item.imageName;
     const extension = name.split(".")[1];
@@ -54,9 +57,22 @@ const multiple_upload_update = async (req: Request, res: Response) => {
         console.error("Error:", error);
       });
 
-    return originalPath;
+    return {
+      image: originalPath,
+      imageName: "",
+    };
   });
-  Result = [...urls1, ...urls];
+
+  urls1 !== undefined &&
+    urls1.forEach((item: any) => {
+      Result.push(item.image);
+    });
+  urls !== undefined &&
+    urls.forEach((item: any) => {
+      Result.push(item.image);
+    });
+
+  console.log(typeof Result);
 
   res.status(200).json({
     type: "success",
