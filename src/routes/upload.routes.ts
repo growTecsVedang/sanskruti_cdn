@@ -9,4 +9,5 @@ router.post(
   "/takeMultipleImagesAndUpdate",
   uploadcontroller.multiple_upload_update
 );
+router.post("/svgUpload", uploadcontroller.svg_single_upload);
 export default router;
