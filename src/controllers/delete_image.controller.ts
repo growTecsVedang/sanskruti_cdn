@@ -14,7 +14,6 @@ const delete_image = async (req: Request, res: Response) => {
   }
   res.status(200).json({
     type: "success",
-    message: "image deleted",
   });
 };
 
